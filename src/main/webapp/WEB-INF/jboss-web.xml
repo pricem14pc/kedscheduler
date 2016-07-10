@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- JBoss http listening at http://localhost:8080 -->
+<!-- this ensures requests at http://localhost:8080/webappdemo are handled by this .war app -->
+<jboss-web>
+    <context-root>rrm-kedsched</context-root>
+</jboss-web>

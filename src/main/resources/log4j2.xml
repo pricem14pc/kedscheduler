@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Configuration status="DEBUG">
+	<Properties>
+		<Property name="log-path">/Users/pricem/development/logs/</Property>
+	</Properties>
+	<Appenders>
+		<RollingFile name="RollingFile" fileName="${log-path}/usrmgmt.log"
+			filePattern="${log-path}/rrm-kedsched.log-%d{yyyy-MM-dd}-%i.log">
+			<PatternLayout>
+				<pattern>%d{dd/MMM/yyyy HH:mm:ss,SSS} - %c{1}: %msg%n</pattern>
+			</PatternLayout>
+			<Policies>
+				<SizeBasedTriggeringPolicy size="5 MB" />
+			</Policies>
+			<DefaultRolloverStrategy max="5" />
+		</RollingFile>
+		<Console name="Console" target="SYSTEM_OUT">
+			<PatternLayout pattern="%d{dd/MMM/yyyy HH:mm:ss,SSS} - %c{1}: %msg%n" />
+		</Console>
+	</Appenders>
+	<Loggers>
+		<Logger name="root" level="trace" additivity="false">
+			<appender-ref ref="RollingFile" level="trace" />
+		</Logger>
+		<Root level="trace" additivity="false">
+			<AppenderRef ref="RollingFile" />
+			<AppenderRef ref="Console" />
+		</Root>
+	</Loggers>
+</Configuration>
