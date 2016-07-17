@@ -13,4 +13,9 @@
 	<context:component-scan base-package="ons.gov.uk.edc.rrm.kedsched.controllers" />
 	<mvc:annotation-driven />
 	
+	<bean class="org.springframework.web.servlet.view.InternalResourceViewResolver">
+      <property name="prefix" value="/WEB-INF/jsp/" />
+      <property name="suffix" value=".jsp" />
+    </bean>
+	
 </beans>
