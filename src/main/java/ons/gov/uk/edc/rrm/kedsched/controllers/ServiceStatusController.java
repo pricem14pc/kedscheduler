@@ -5,7 +5,7 @@ package ons.gov.uk.edc.rrm.kedsched.controllers;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
-
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -16,8 +16,11 @@ public class ServiceStatusController {
 
 	private static final Logger logger = LogManager.getLogger();
 
+	@Autowired
+	private ServiceStatus serviceStatus;
+	
     public ServiceStatusController() {
-    	logger.info("Creating StatusController()");
+    	logger.info("Creating ServiceStatusController bean...");
 	}
     
     /**
@@ -27,6 +30,6 @@ public class ServiceStatusController {
      */
     @RequestMapping(value="/showStatus", method = RequestMethod.GET)
     public @ResponseBody ServiceStatus status() {
-       return logger.exit(ServiceStatus.getInstance());
+       return logger.exit(serviceStatus);
     }
 }

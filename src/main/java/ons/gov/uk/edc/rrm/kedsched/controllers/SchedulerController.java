@@ -20,7 +20,7 @@ public class SchedulerController {
 	private static final Logger logger = LogManager.getLogger();
 
     public SchedulerController() {
-    	logger.info("Creating SchedulerController()");
+    	logger.info("Creating SchedulerController bean...");
 	}
     
     @RequestMapping(value="/listSchedule", method = RequestMethod.POST)

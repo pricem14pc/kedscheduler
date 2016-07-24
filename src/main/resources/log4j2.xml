@@ -4,7 +4,7 @@
 		<Property name="log-path">/Users/pricem/development/logs/</Property>
 	</Properties>
 	<Appenders>
-		<RollingFile name="RollingFile" fileName="${log-path}/usrmgmt.log"
+		<RollingFile name="RollingFile" fileName="${log-path}/rrm-kedsched.log"
 			filePattern="${log-path}/rrm-kedsched.log-%d{yyyy-MM-dd}-%i.log">
 			<PatternLayout>
 				<pattern>%d{dd/MMM/yyyy HH:mm:ss,SSS} - %c{1}: %msg%n</pattern>
