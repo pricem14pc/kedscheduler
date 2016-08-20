@@ -5,7 +5,7 @@
 	<artifactId>kedsched</artifactId>
 	<packaging>war</packaging>
 	<version>0.0.2-SNAPSHOT</version>
-	<name>kedsched Maven Webapp</name>
+	<name>Ked Event Date Scheduler</name>
 	<url>http://maven.apache.org</url>
 	<properties>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
