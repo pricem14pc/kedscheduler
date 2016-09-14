@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+    xmlns:tx="http://www.springframework.org/schema/tx" 
+    xmlns:context="http://www.springframework.org/schema/context"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+    xmlns:jpa="http://www.springframework.org/schema/data/jpa"
+    xmlns:aop="http://www.springframework.org/schema/aop"
+    xmlns:jee="http://www.springframework.org/schema/jee"
+    xmlns:task="http://www.springframework.org/schema/task"
+    xsi:schemaLocation="http://www.springframework.org/schema/beans
+       http://www.springframework.org/schema/beans/spring-beans-4.1.xsd
+       http://www.springframework.org/schema/context
+       http://www.springframework.org/schema/context/spring-context-4.1.xsd
+       http://www.springframework.org/schema/tx 
+       http://www.springframework.org/schema/tx/spring-tx-4.1.xsd
+       http://www.springframework.org/schema/data/jpa 
+       http://www.springframework.org/schema/data/jpa/spring-jpa-1.8.xsd
+       http://www.springframework.org/schema/jee
+       http://www.springframework.org/schema/jee/spring-jee.xsd 
+       http://www.springframework.org/schema/aop 
+       http://www.springframework.org/schema/aop/spring-aop-4.1.xsd
+       http://www.springframework.org/schema/task
+       http://www.springframework.org/schema/task/spring-task-4.1.xsd" >
+
+    <context:component-scan base-package="uk.gov.ons.rrm.kedsched.services,
+                                          uk.gov.ons.rrm.kedsched.dao,
+                                          uk.gov.ons.rrm.kedsched.dto,
+                                          uk.gov.ons.rrm.kedsched.tasks" />
+    <context:annotation-config />                 
+
+    <task:annotation-driven />
+                                          
+    <aop:aspectj-autoproxy proxy-target-class="false"/>
+
+    <jpa:repositories base-package="uk.gov.ons.rrm.kedsched.dao"
+        entity-manager-factory-ref="edcEmf" transaction-manager-ref="transactionManager" />
+        
+    <context:property-placeholder location="classpath*:settings.properties,
+                                            classpath*:kedscheduler.properties" />
+
+    <!-- SHR database. -->
+    <jee:jndi-lookup id="edcDataSource" jndi-name="java:jboss/jdbc/${share.datasource.name}"/>
+    
+    <bean id="jdbcTemplate" class="org.springframework.jdbc.core.JdbcTemplate">
+    	<property name="dataSource" ref="edcDataSource"></property>
+    </bean>
+
+    <bean id="pum"
+        class="org.springframework.orm.jpa.persistenceunit.DefaultPersistenceUnitManager">
+        <property name="persistenceXmlLocations">
+            <list>
+                <value>classpath*:META-INF/persistence.xml</value>
+            </list>
+        </property>
+        <property name="defaultDataSource" ref="edcDataSource"></property>
+    </bean>
+
+    <bean id="edcEmf"
+        class="org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean">
+        <property name="persistenceUnitManager" ref="pum" />
+        <property name="dataSource" ref="edcDataSource" />
+        <property name="jpaVendorAdapter">
+            <bean class="org.springframework.orm.jpa.vendor.HibernateJpaVendorAdapter">
+                <property name="showSql" value="true" />
+                <property name="generateDdl" value="false" />
+                <property name="databasePlatform" value="org.hibernate.dialect.PostgreSQLDialect" />
+            </bean>
+        </property>
+    </bean>
+
+    <bean id="transactionManager" class="org.springframework.orm.jpa.JpaTransactionManager">
+        <property name="entityManagerFactory" ref="edcEmf" />
+    </bean>
+    <tx:annotation-driven transaction-manager="transactionManager" />
+
+    <bean class="org.springframework.dao.annotation.PersistenceExceptionTranslationPostProcessor" />
+    
+    <bean id="restTemplate" class="org.springframework.web.client.RestTemplate" />
+</beans>

@@ -8,7 +8,6 @@
 	<properties>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 		<hibernate.version>3.5.1-FINAL</hibernate.version>
-                <version.spring>4.1.6.RELEASE</version.spring>
 	</properties>
 
 	<name>ked-scheduler</name>
@@ -44,19 +43,28 @@
 		</resources>
 	</build>
 
+	<parent>
+		<groupId>uk.gov.ons.rrm.services</groupId>
+		<artifactId>rrm-services</artifactId>
+		<version>1.1.0-RELEASE</version>
+	</parent>
+
 
 	<dependencies>
+	    <dependency>
+			<groupId>uk.gov.ons.rrm.services</groupId>
+			<artifactId>rrm-services-common</artifactId>
+			<version>${project.parent.version}</version><!--$NO-MVN-MAN-VER$-->
+		</dependency>
 
 		<dependency>
 			<groupId>org.springframework</groupId>
 			<artifactId>spring-web</artifactId>
-			<version>${version.spring}</version>
 		</dependency>
 
 		<dependency>
 			<groupId>org.springframework</groupId>
 			<artifactId>spring-webmvc</artifactId>
-			<version>${version.spring}</version>
 		</dependency>
 		<dependency>
 			<groupId>javax.servlet</groupId>
@@ -136,7 +144,6 @@
 		<dependency>
 			<groupId>org.mockito</groupId>
 			<artifactId>mockito-all</artifactId>
-			<version>1.9.5</version>
 			<scope>test</scope>
 		</dependency>
 		<dependency>
@@ -176,13 +183,6 @@
 			<version>1.3</version>
 			<scope>test</scope>
 		</dependency>
-
-		<dependency>
-		    <groupId>org.apache.logging.log4j</groupId>
-		    <artifactId>log4j-core</artifactId>
-		    <version>2.6.2</version>
-		</dependency>
-
 	</dependencies>
 
 	<description>This is the RRM Key Event Date Scheduler. This webapp provides functionality to invoke RRM survey-service REST API to automate the generation of notifications (Letter files and Email messages). It will provide ( 1 ) basic UI to view the event dates ( 2 ) basic UI to manually trigger notifications ( 3 ) spring timer to automatically trigger the notifications at the key event dates.</description>
