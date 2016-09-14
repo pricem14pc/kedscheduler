@@ -1,1 +1,1 @@
-# kedscheduler
+# kedscheduler (intended for CloudFoundry)
