@@ -3,7 +3,8 @@
 <jboss-deployment-structure>
 	<deployment>
 		<dependencies>
-			<module name="uk.gov.ons.edcw.kedscheduler.configuration" />
+		<!-- To be provided by cf -->
+			<!--  module name="uk.gov.ons.edcw.kedscheduler.configuration" / -->
 		</dependencies>
 	</deployment>
 </jboss-deployment-structure>

@@ -39,7 +39,7 @@
                                             classpath*:kedscheduler.properties" />
 
     <!-- SHR database. -->
-    <jee:jndi-lookup id="edcDataSource" jndi-name="java:jboss/jdbc/${share.datasource.name}"/>
+    <jee:jndi-lookup id="edcDataSource" jndi-name="java:/postgresqlDS" />
     
     <bean id="jdbcTemplate" class="org.springframework.jdbc.core.JdbcTemplate">
     	<property name="dataSource" ref="edcDataSource"></property>
