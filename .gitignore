@@ -2,7 +2,7 @@
 .DS_Store
 # Mobile Tools for Java (J2ME)
 .mtj.tmp/
-.TEST-in-sandpit2
+.TEST-in-sandpit1-sandpit2-merged!
 # Package Files #
 *.jar
 *.war
